@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Virtual UVa - SISTEMAS ELECTRONICOS BASADOS EN MICROPROCESADOR (META64764-2024)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Tailwind CSS para la maquetación -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome para los iconos de archivos, carpetas, etc. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuración de colores personalizados de la UVa -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        uvaPrimary: '#a60032', // Rojo UVa
+                        uvaSecondary: '#8a0029', // Rojo UVa oscuro para la segunda barra
+                        uvaFooter: '#0b1b3f', // Azul oscuro del footer
+                        uvaText: '#1d2125',
+                        uvaLink: '#0f6cbf'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos adicionales suaves */
+        body { background-color: #f2f4f8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .moodle-card { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .moodle-link-hover:hover { background-color: #f8f9fa; }
+    </style>
+</head>
+<body class="text-uvaText flex flex-col min-h-screen">
+
+    <!-- HEADER SUPERIOR (Rojo UVa) -->
+    <header class="sticky top-0 z-50 w-full shadow">
+        <!-- Barra principal -->
+        <div class="bg-uvaPrimary text-white px-4 py-2 flex items-center justify-between text-sm">
+            <div class="flex items-center gap-6">
+                <!-- Logo UVa Simulado -->
+                <a href="https://campusvirtual.uva.es" class="font-bold text-xl bg-uvaSecondary px-2 py-1 rounded tracking-wider" title="Campus Virtual UVa">UVa</a>
+                
+                <!-- Menú Navegación -->
+                <nav class="hidden md:flex gap-4 font-medium">
+                    <a href="#" class="hover:underline">Página Principal</a>
+                    <a href="#" class="hover:underline">Área personal</a>
+                    <a href="#" class="hover:underline">Mis asignaturas</a>
+                    <a href="#" class="hover:underline flex items-center gap-1">Mi Campus <i class="fa-solid fa-chevron-down text-xs"></i></a>
+                    <a href="#" class="hover:underline flex items-center gap-1">Ayuda <i class="fa-solid fa-chevron-down text-xs"></i></a>
+                    <a href="#" class="hover:underline">My Media</a>
+                </nav>
+            </div>
+            
+            <!-- Iconos derecha -->
+            <div class="flex items-center gap-4">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button><i class="fa-regular fa-bell"></i></button>
+                <button><i class="fa-solid fa-envelope"></i></button>
+                <div class="w-8 h-8 bg-gray-300 rounded-full border-2 border-white overflow-hidden flex items-center justify-center text-gray-500">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Segunda Barra (Asignatura, Participantes...) -->
+        <div class="bg-uvaSecondary text-white px-4 flex items-center overflow-x-auto text-sm">
+            <a href="#" class="px-4 py-3 font-semibold bg-white text-uvaSecondary border-t-2 border-uvaPrimary">Asignatura</a>
+            <a href="#" class="px-4 py-3 hover:bg-white/10 transition-colors">Participantes</a>
+            <a href="#" class="px-4 py-3 hover:bg-white/10 transition-colors">Calificaciones</a>
+            <a href="#" class="px-4 py-3 hover:bg-white/10 transition-colors">Media Gallery</a>
+            <a href="#" class="px-4 py-3 hover:bg-white/10 transition-colors">Traspasar horarios</a>
+            <a href="#" class="px-4 py-3 hover:bg-white/10 transition-colors flex items-center gap-1">Más <i class="fa-solid fa-chevron-down text-xs"></i></a>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="flex flex-1 w-full max-w-[1600px] mx-auto">
+        
+        <!-- BARRA LATERAL IZQUIERDA (Menú de temas) -->
+        <aside class="hidden lg:block w-72 p-4 border-r border-gray-200 bg-white sticky top-[100px] h-[calc(100vh-100px)] overflow-y-auto">
+            <nav class="space-y-1 text-sm">
+                <a href="#general" class="block py-2 px-3 bg-blue-50 text-blue-800 rounded font-semibold border-l-4 border-blue-600"><i class="fa-solid fa-check text-xs mr-2"></i> General</a>
+                <a href="#tema1" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">TEMA 1 - MÁQUINAS DE ESTADOS ALGORÍTMICAS</a>
+                <a href="#tema2" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">TEMA 2: SISTEMAS ALGORÍTMICOS PROGRAMABLES</a>
+                <a href="#tema3" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">TEMA 3: ARQUITECTURA DEL CONJUNTO DE INSTRUCCIONES</a>
+                <a href="#tema4" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">TEMA 4: ESTUDIO DEL PROCESADOR ARM7</a>
+                <a href="#tema5" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">TEMA 5: ESTUDIO DEL MICROCONTROLADOR LPC2103</a>
+                <a href="#practicas" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">PRÁCTICAS</a>
+                <a href="#tutorias" class="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded ml-4">TUTORÍAS</a>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO CENTRAL -->
+        <main class="flex-1 p-4 md:p-8 overflow-hidden">
+            
+            <!-- Título de la Asignatura -->
+            <h1 class="text-3xl font-bold text-[#0f6cbf] mb-6 drop-shadow-sm">SISTEMAS ELECTRONICOS BASADOS EN MICROPROCESADOR (META64764-2024)</h1>
+            
+            <!-- Alerta informativa -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 rounded shadow-sm text-blue-800 text-sm">
+                <i class="fa-solid fa-circle-info mr-2"></i>
+                Este archivo es parte del contenido descargado de <a href="https://campusvirtual.uva.es/course/view.php?id=64764" class="font-semibold underline">SISTEMAS ELECTRONICOS BASADOS EN MICROPROCESADOR (META64764-2024)</a>.
+            </div>
+
+            <div class="mb-6 px-2">
+                <a href="./about.html" class="text-uvaLink hover:underline flex items-center gap-2"><i class="fa-solid fa-circle-question"></i> Resumen del curso</a>
+            </div>
+
+            <!-- SECCIÓN GENERAL -->
+            <section id="general" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-general', 'icon-general')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-general" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> General
+                    </h3>
+                    <span class="text-sm text-blue-600 hover:underline">Colapsar todo</span>
+                </div>
+                <div id="body-general" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed space-y-4 text-sm">
+                        <p>La asignatura de “Sistemas Electrónicos Basados en Microprocesador” se encuentra dentro del bloque de materias básicas de telecomunicaciones, concretamente, es la segunda y última asignatura que se imparte dentro de la materia de “Electrónica Digital”. Está planteada como una continuación de la asignatura de “Circuitos Electrónicos Digitales” o, lo que es lo mismo, como una Electrónica Digital avanzada. En ella se combinan los bloques digitales estudiados en la asignatura de “Circuitos Electrónicos Digitales” para diseñar sistemas digitales más complejos como son máquinas algorítmicas programables básicas a nivel de registro.</p>
+                        <p>El diseño y compresión de estos sistemas básicos será el pilar donde se asiente el estudio de los microprocesadores en todas sus variantes (microprocesadores, microcontroladores, DSP’s). Esto permitirá obtener al alumno una visión profunda de su funcionamiento.</p>
+                        <p>Y como los microprocesadores están presentes en cualquier sistema electrónico de tratamiento de información, en una segunda parte de la asignatura se describirá someramente su conexión e interrelación con el resto de los componentes electrónicos utilizando un microcontrolador concreto, lo que dará al alumno una visión de conjunto que será posteriormente ampliada en cursos superiores en función de la aplicación específica del sistema completo.</p>
+                    </div>
+                    
+                    <!-- Lista de Recursos General -->
+                    <div class="space-y-1 mt-4 border-t border-gray-100 pt-4">
+                        <a href="./Foro_Avisos_.6408725/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-solid fa-comments text-purple-600 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Avisos (Foro)</span>
+                        </a>
+                        <a href="./Archivo_Gua_docente_.6408726/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Guía docente (Archivo)</span>
+                        </a>
+                        <a href="./Archivo_Plan_de_trabajo_.6408927/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Plan de trabajo (Archivo)</span>
+                        </a>
+                        <a href="./Archivo_Presentacin_asignatura_.6408728/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-powerpoint text-orange-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Presentación asignatura (Archivo)</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TEMA 1 -->
+            <section id="tema1" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-tema1', 'icon-tema1')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-tema1" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> TEMA 1 - MÁQUINAS DE ESTADOS ALGORÍTMICAS
+                    </h3>
+                </div>
+                <div id="body-tema1" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed text-sm bg-gray-50 p-4 rounded border border-gray-100">
+                        1.1.- Introducción: Máquinas de estados algorítmicas.<br />
+                        1.2.- Unidad de procesamiento de datos (Ruta de datos).<br />
+                        1.3.- Controladores. Implementación de un controlador.<br />
+                        1.4.- Control cableado.<br />
+                        1.5.- Control microprogramado - palabra de control.
+                    </div>
+                    <div class="space-y-1">
+                        <a href="./Archivo_Transparencias_.6408729/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Transparencias (Archivo)</span>
+                        </a>
+                        <a href="./Archivo_Problemas_.6408730/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Problemas (Archivo)</span>
+                        </a>
+                        <!-- Soluciones (generado en bloque) -->
+                        <script>
+                            for(let i=1; i<=9; i++){
+                                document.write(`
+                                <a href="./Archivo_Solucin_problema_${i}_.640873${i}/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                                    <i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i>
+                                    <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema ${i} (Archivo)</span>
+                                </a>
+                                `);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TEMA 2 -->
+            <section id="tema2" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-tema2', 'icon-tema2')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-tema2" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> TEMA 2: SISTEMAS ALGORÍTMICOS PROGRAMABLES
+                    </h3>
+                </div>
+                <div id="body-tema2" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed text-sm bg-gray-50 p-4 rounded border border-gray-100">
+                        2.1.- Introducción: Sistemas digitales de proceso.<br />
+                        2.2.- Arquitectura de un ordenador sencillo.<br />
+                        2.3.- Unidad Aritmético-Lógica y Desplazador.<br />
+                        2.4.- Control cableado de ciclo sencillo - Arquitectura Harvard.<br />
+                        2.5.- Ruta de datos y control en canalización.<br />
+                        2.6.- Control microprogramado de ciclos múltiples - Arquitectura Von-Neumann.
+                    </div>
+                    <div class="space-y-1">
+                        <a href="./Archivo_Transparencias_.6408740/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Transparencias (Archivo)</span>
+                        </a>
+                        <a href="./URL_Apartado_25_-_Vdeo_tutorial_.6408741/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Apartado 2.5 - Vídeo tutorial (URL)</span>
+                        </a>
+                        <a href="./Archivo_Problemas_.6408742/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Problemas (Archivo)</span>
+                        </a>
+                        <script>
+                            for(let i=1; i<=13; i++){
+                                document.write(`
+                                <a href="./Archivo_Solucin_problema_${i}_.640874${i+2}/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                                    <i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i>
+                                    <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema ${i} (Archivo)</span>
+                                </a>
+                                `);
+                            }
+                        </script>
+                        <a href="./URL_Solucin_problema_13_-_Vde..._.6408756/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 13 - Vídeo tutorial (URL)</span>
+                        </a>
+                        <a href="./Carpeta_Maquina_ciclo_sencill..._.6408757/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-solid fa-folder text-blue-400 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Maquina ciclo sencillo en Verilog (Carpeta)</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TEMA 3 -->
+            <section id="tema3" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-tema3', 'icon-tema3')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-tema3" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> TEMA 3: ARQUITECTURA DEL CONJUNTO DE INSTRUCCIONES
+                    </h3>
+                </div>
+                <div id="body-tema3" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed text-sm bg-gray-50 p-4 rounded border border-gray-100">
+                        3.1.- Conceptos de arquitectura de computación.<br />
+                        3.2.- Direccionamiento de operandos.<br />
+                        3.3.- Modos de direccionamiento.<br />
+                        3.4.- Arquitecturas del conjunto de instrucciones.<br />
+                        3.5.- Instrucciones de transferencia de datos.<br />
+                        3.6.- Instrucciones de manipulación de datos.<br />
+                        3.7.- Instrucciones de control de programa.<br />
+                        3.8.- Interrupciones.
+                    </div>
+                    <div class="space-y-1">
+                        <a href="./Archivo_Transparencias_.6408758/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Transparencias (Archivo)</span>
+                        </a>
+                        <a href="./URL_Apartado_35_-_Vdeo_tutori..._.6408759/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Apartado 3.5 - Vídeo tutorial sobre el mapeado de memoria (URL)</span>
+                        </a>
+                        <a href="./Archivo_Problemas_.6408760/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group">
+                            <i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i>
+                            <span class="text-uvaLink group-hover:underline font-medium ml-2">Problemas (Archivo)</span>
+                        </a>
+                        <!-- Lista manual de TEMA 3 ya que los links no son secuenciales en id -->
+                        <a href="./Archivo_Solucin_problema_1_.6408761/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 1 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_2_.6408762/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 2 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_3_.6408763/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 3 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_4_.6408764/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 4 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_4_-_Vdeo..._.6408765/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 4 - Vídeo tutorial (URL)</span></a>
+                        <a href="./Archivo_Solucin_problema_5_.6408766/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 5 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_5_-_Vdeo..._.6408767/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 5 - Vídeo tutorial (URL)</span></a>
+                        <a href="./Archivo_Solucin_problema_6_.6408768/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 6 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_6_-_Vdeo..._.6408769/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 6 - Vídeo tutorial (URL)</span></a>
+                        <a href="./Archivo_Solucin_problema_7_.6408770/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 7 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_7_-_Vdeo..._.6408771/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 7 - Vídeo tutorial (URL)</span></a>
+                        <a href="./Archivo_Solucin_problema_8_.6408772/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 8 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_8_-_Vdeo..._.6408773/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 8 - Vídeo tutorial (URL)</span></a>
+                        <a href="./Archivo_Solucin_problema_9_.6408774/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 9 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_10_.6408775/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 10 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_11_.6408776/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 11 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_12_.6408777/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 12 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_12_-_Vde..._.6408778/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 12 - Vídeo tutorial (URL)</span></a>
+                        <a href="./Archivo_Solucin_problema_13_.6408779/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 13 (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_13_-_Vde..._.6408780/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 13 - Vídeo tutorial (URL)</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TEMA 4 -->
+            <section id="tema4" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-tema4', 'icon-tema4')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-tema4" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> TEMA 4: ESTUDIO DEL PROCESADOR ARM7
+                    </h3>
+                </div>
+                <div id="body-tema4" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed text-sm bg-gray-50 p-4 rounded border border-gray-100">
+                        4.1.- Introducción.<br />
+                        4.2.- Arquitectura.<br />
+                        4.3.- Conjunto de instrucciones (estado ARM).<br />
+                        4.4.- Modelo del programador.
+                    </div>
+                    <div class="space-y-1">
+                        <a href="./Archivo_Transparencias_.6408781/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Transparencias (Archivo)</span></a>
+                        <a href="./Archivo_Manual_ARM7_.6408782/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Manual ARM7 (Archivo)</span></a>
+                        <a href="./Archivo_Instrucciones_ARM7_.6408783/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Instrucciones ARM7 (Archivo)</span></a>
+                        <a href="./Archivo_Tabla_resumen_instruc..._.6408784/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Tabla resumen instrucciones ARM7 (Archivo)</span></a>
+                        <a href="./Archivo_Convenio_para_el_paso..._.6408785/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Convenio para el paso de parámetros a subrutinas en ARM (Archivo)</span></a>
+                        
+                        <!-- URLs -->
+                        <a href="./URL_01_Introduccin_.6408786/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">01 Introducción (URL)</span></a>
+                        <a href="./URL_02_Arquitectura_ARM_-_har..._.6408787/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">02 Arquitectura ARM - hardware ARM7 (URL)</span></a>
+                        <a href="./URL_03_Registros_ARM7_-_ejecu..._.6408788/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">03 Registros ARM7 - ejecución condicional y actualización de flags (URL)</span></a>
+                        <a href="./URL_04_Ejemplos_de_ejecucin_c..._.6408789/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">04 Ejemplos de ejecución condicional (URL)</span></a>
+                        <a href="./URL_05_Instrucciones_de_manip..._.6408790/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">05 Instrucciones de manipulación de datos (1/3) (URL)</span></a>
+                        <a href="./URL_06_El_operando_2_-_Instru..._.6408791/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">06 El operando 2 - Instrucciones de manipulación de datos (2/3) (URL)</span></a>
+                        <a href="./URL_07_Pseudoinstrucciones_y_..._.6408792/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">07 Pseudoinstrucciones y multiplicación - Instrucciones de manipulación de datos (3/3) (URL)</span></a>
+                        <a href="./URL_08_Instrucciones_de_bifur..._.6408793/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">08 Instrucciones de bifurcación (URL)</span></a>
+                        <a href="./URL_09_Instrucciones_de_trans..._.6408794/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">09 Instrucciones de transferencia simples (URL)</span></a>
+                        <a href="./URL_10_Instrucciones_de_trans..._.6408795/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">10 Instrucciones de transferencia múltiple (URL)</span></a>
+                        <a href="./URL_11_Instrucciones_MRS_MSR_SWP_.6408796/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">11 Instrucciones MRS, MSR, SWP (URL)</span></a>
+                        <a href="./URL_12_Interrupciones_excepci..._.6408797/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">12 Interrupciones, excepciones, SWI (URL)</span></a>
+                        <a href="./URL_14_Instrucciones_Thumb_co..._.6408800/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">14 Instrucciones Thumb, coprocesadores (URL)</span></a>
+                        
+                        <!-- Problemas -->
+                        <a href="./Archivo_Problemas_.6408801/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Problemas (Archivo)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_1_-_..._.6408802/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 1 - subrutina bitrev (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_1_-_subr..._.6408803/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 1 - subrutina bitrev - vídeo tutorial (URL)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_2_-_..._.6408804/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 2 - subrutina toupper (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_2_-_subr..._.6408805/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 2 - subrutina toupper - vídeo tutorial (URL)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_3_-_..._.6408806/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 3 - subrutina divi (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_3_-_subr..._.6408807/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 3 - subrutina divi - vídeo tutorial (URL)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_4_-_..._.6408808/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 4 - subrutina bin_hex_conv (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_5_-_..._.6408809/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 5 - subrutina bin_asc_conv (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_6_-_..._.6408810/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 6 - subrutina rms2 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_7_-_..._.6408811/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 7 - subrutina reverse (Archivo)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_8_-_..._.6408812/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 8 - subrutina memcpy (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_8_-_subr..._.6408813/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 8 - subrutina memcpy - vídeo tutorial (URL)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_9_-_..._.6408814/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 9 - subrutina memcpyf (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_9_-_subr..._.6408815/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 9 - subrutina memcpyf - vídeo tutorial (URL)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_10_-..._.6408816/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 10 - subrutina MCD (Archivo)</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TEMA 5 -->
+            <section id="tema5" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-tema5', 'icon-tema5')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-tema5" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> TEMA 5: ESTUDIO DEL MICROCONTROLADOR LPC2103
+                    </h3>
+                </div>
+                <div id="body-tema5" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed text-sm bg-gray-50 p-4 rounded border border-gray-100">
+                        5.1.- Introducción.<br />
+                        5.2.- Bloque de control del sistema.<br />
+                        5.3.- Controlador de interrupciones vectorizadas (VIC).<br />
+                        5.4.- Bloques de entrada/salida de propósito general (GPIO).<br />
+                        5.5.- Unidad de transmisión/recepción asíncrona (UART).<br />
+                        5.6.- Temporizadores.<br />
+                    </div>
+                    <div class="space-y-1">
+                        <a href="./Archivo_Transparencias_.6408817/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Transparencias (Archivo)</span></a>
+                        <a href="./Archivo_Manual_LPC2103_.6408818/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Manual LPC2103 (Archivo)</span></a>
+                        <a href="./Archivo_Especificaciones_LPC2103_.6408819/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Especificaciones LPC2103 (Archivo)</span></a>
+                        
+                        <a href="./URL_01_Introduccin_Esquema_de..._.6408820/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">01 Introducción. Esquema de bloques (URL)</span></a>
+                        <a href="./URL_02_Mapa_de_memoria_.6408821/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">02 Mapa de memoria (URL)</span></a>
+                        <a href="./URL_03_Legacy_GPIO_.6408822/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">03 Legacy GPIO (URL)</span></a>
+                        
+                        <a href="./Archivo_Problemas_.6408823/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Problemas (Archivo)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_1_-_PLL_.6408824/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 1 - PLL (Archivo)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_2_-_..._.6408825/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 2 - GPIO (Archivo)</span></a>
+                        <a href="./URL_Solucin_problema_2_-_GPIO..._.6408826/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 2 - GPIO - vídeo tutorial (URL)</span></a>
+                        
+                        <a href="./Archivo_Solucin_problema_3_-_VIC_.6408827/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 3 - VIC (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_problema_4_-_..._.6408828/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución problema 4 - Interrupciones externas (Archivo)</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRÁCTICAS -->
+            <section id="practicas" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-practicas', 'icon-practicas')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-practicas" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> PRÁCTICAS
+                    </h3>
+                </div>
+                <div id="body-practicas" class="p-6">
+                    <div class="text-gray-700 mb-6 leading-relaxed space-y-4 text-sm bg-blue-50 p-4 rounded border border-blue-100">
+                        <p>Las prácticas se llevarán a cabo en el laboratorio 1L019. En ellas se aprenderá la programación básica del procesador ARM7. No empezaremos hasta el mes de abril, ya os avisaré tanto en clase como a través del foro del campus virtual. La asistencia a prácticas no es obligatoria.</p>
+                        <p>A continuación os dejo un enlace a un documento compartido para que os vayáis apuntando por parejas para hacer las prácticas. Mientras no se llene el laboratorio (hay 20 puestos en total), podéis hacer las prácticas individualmente, si lo preferís (en ese caso rellenad solamente el campo “ALUMNO 1”). Yo os recomiendo que las hagáis por parejas porque así podéis repartiros el trabajo y ayudaros mutuamente.</p>
+                    </div>
+                    <div class="space-y-1">
+                        <a href="./Archivo_Introduccin_al_microc..._.6408830/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Introducción al microcontrolador LPC2103 (Archivo)</span></a>
+                        
+                        <a href="./Archivo_Prctica_1_.6408829/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group mt-4"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Práctica 1 (Archivo)</span></a>
+                        <a href="./Archivo_Ficheros_para_la_prct..._.6408831/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-file-zipper text-gray-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ficheros para la práctica 1 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_Prctica_1_-_E..._.6501655/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución Práctica 1 - Ejercicio 0 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_Prctica_1_-_E..._.6408835/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución Práctica 1 - Ejercicio 1 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_Prctica_1_-_E..._.6408836/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución Práctica 1 - Ejercicio 2 (Archivo)</span></a>
+                        <a href="./URL_Ejecucin_programa_en_Prot..._.6408832/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ejecución programa en Proteus (1/3) (URL)</span></a>
+                        <a href="./URL_Ejecucin_programa_en_Prot..._.6408833/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ejecución programa en Proteus (2/3) (URL)</span></a>
+                        <a href="./URL_Ejecucin_programa_en_Prot..._.6408834/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ejecución programa en Proteus (3/3) (URL)</span></a>
+
+                        <a href="./Archivo_Prctica_2_.6408837/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group mt-4"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Práctica 2 (Archivo)</span></a>
+                        <a href="./Archivo_Ficheros_para_la_prct..._.6408838/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-file-zipper text-gray-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ficheros para la práctica 2 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_Prctica_2_.6408839/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución Práctica 2 (Archivo)</span></a>
+                        <a href="./URL_Excepciones_e_ISR_en_Proteus_.6408840/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Excepciones e ISR en Proteus (URL)</span></a>
+                        <a href="./URL_Ejemplo_de_excepcin_Undef..._.6408841/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ejemplo de excepción Undefined (URL)</span></a>
+                        <a href="./URL_Ejemplos_de_excepciones_P..._.6408842/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-link text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ejemplos de excepciones Prefetch Abort y Data Abort (URL)</span></a>
+
+                        <a href="./Archivo_Prctica_3_.6408843/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group mt-4"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Práctica 3 (Archivo)</span></a>
+                        <a href="./Archivo_Ficheros_para_la_prct..._.6408844/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-file-zipper text-gray-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ficheros para la práctica 3 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_Prctica_3_.6408845/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución Práctica 3 (Archivo)</span></a>
+
+                        <a href="./Archivo_Prctica_4_.6408846/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group mt-4"><i class="fa-regular fa-file-pdf text-blue-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Práctica 4 (Archivo)</span></a>
+                        <a href="./Archivo_Ficheros_para_la_prct..._.6408847/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-solid fa-file-zipper text-gray-500 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Ficheros para la práctica 4 (Archivo)</span></a>
+                        <a href="./Archivo_Solucin_Prctica_4_.6408848/index.html" class="moodle-link-hover flex items-center p-2 rounded transition-colors group"><i class="fa-regular fa-file-lines text-green-600 w-8 text-center text-lg"></i> <span class="text-uvaLink group-hover:underline font-medium ml-2">Solución Práctica 4 (Archivo)</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TUTORÍAS -->
+            <section id="tutorias" class="bg-white rounded-lg border border-gray-200 mb-6 moodle-card">
+                <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100 cursor-pointer text-gray-800 hover:bg-gray-50 transition-colors" onclick="toggleSection('body-tutorias', 'icon-tutorias')">
+                    <h3 class="text-xl font-bold flex items-center gap-3">
+                        <i id="icon-tutorias" class="fa-solid fa-chevron-down text-blue-500 w-5 transition-transform duration-200"></i> TUTORÍAS
+                    </h3>
+                </div>
+                <div id="body-tutorias" class="p-6">
+                    <div class="text-gray-700 leading-relaxed text-sm">
+                        <p>Los horarios de tutorías están fijados para los lunes, martes y
+                        viernes de 16:00 a 18:00. Sin embargo, no tengo inconveniente en atender dudas
+                        fuera de este horario. En cualquier caso, para concertar cita escribidme un <u><a href="mailto:lmarques@uva.es" class="text-uvaLink hover:underline font-semibold">e-mail</a></u>.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER OSCURO UVa -->
+    <footer class="bg-uvaFooter text-white mt-auto py-8 text-sm border-t-4 border-uvaPrimary">
+        <div class="max-w-[1600px] mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Izquierda: Redes y Contacto -->
+            <div>
+                <h4 class="font-bold mb-4">Contáctanos</h4>
+                <div class="flex gap-2 mb-6">
+                    <a href="#" class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition"><i class="fa-solid fa-globe"></i></a>
+                    <a href="#" class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <h4 class="font-bold mb-4">Síguenos</h4>
+                <div class="flex gap-2">
+                    <a href="#" class="w-8 h-8 rounded bg-blue-400 flex items-center justify-center hover:bg-blue-300 transition"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Centro: Soporte e Info de la Exportación -->
+            <div class="text-center md:border-x border-gray-700 px-4 flex flex-col items-center justify-center gap-4">
+                <a href="#" class="border border-white hover:bg-white hover:text-uvaFooter transition rounded px-4 py-2 font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Contactar con el soporte del sitio
+                </a>
+                <p class="text-gray-300">
+                    Usted se ha identificado como RODRIGUEZ ROJO, ALVARO (Cerrar sesión)
+                </p>
+                <p class="text-gray-400 text-xs mt-4">
+                    Este archivo es parte del contenido descargado de <br> <a href="https://campusvirtual.uva.es/course/view.php?id=64764" class="underline hover:text-white">SISTEMAS ELECTRONICOS BASADOS EN MICROPROCESADOR (META64764-2024)</a> <br> el viernes, 6 de junio de 2025, 17:23 PM.
+                </p>
+            </div>
+
+            <!-- Derecha: Apps Móviles -->
+            <div class="flex flex-col md:items-end justify-center gap-4">
+                <h4 class="font-bold text-center md:text-right">Descargar la app para dispositivos móviles</h4>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-10"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" class="h-10"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Pequeño script para hacer funcionar los acordeones visuales (no afecta el funcionamiento original de los enlaces) -->
+    <script>
+        function toggleSection(bodyId, iconId) {
+            const body = document.getElementById(bodyId);
+            const icon = document.getElementById(iconId);
+            
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                body.classList.add('hidden');
+                icon.style.transform = "rotate(-90deg)";
+            }
+        }
+    </script>
+</body>
+</html>

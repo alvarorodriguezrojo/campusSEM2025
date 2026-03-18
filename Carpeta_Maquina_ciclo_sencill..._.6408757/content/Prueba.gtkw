@@ -1,0 +1,102 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Wed Feb 28 09:33:44 2024
+[*]
+[dumpfile] "C:\Users\HGG\OneDrive - UVa\Escritorio\Ciclo_sencillo\final.vcd"
+[dumpfile_mtime] "Wed Feb 28 09:06:43 2024"
+[dumpfile_size] 14640
+[savefile] "C:\Users\HGG\OneDrive - UVa\Escritorio\Ciclo_sencillo\Prueba.gtkw"
+[timestart] 0
+[size] 1920 1009
+[pos] -61 -61
+*-19.355289 4548000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[treeopen] testbench.modulo_padre.
+[sst_width] 211
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 298
+@28
+testbench.modulo_padre.Clock
+@22
+testbench.modulo_padre.PC_Out[15:0]
+testbench.modulo_padre.Instruction[15:0]
+@28
+testbench.modulo_padre.Prog_Counter.PL
+testbench.modulo_padre.Prog_Counter.JB
+@29
+testbench.modulo_padre.Prog_Counter.BC[2:0]
+@28
+[color] 5
+testbench.modulo_padre.Banco_Registros.A_address[2:0]
+@22
+[color] 5
+testbench.modulo_padre.Banco_Registros.A_bus[15:0]
+@28
+[color] 5
+testbench.modulo_padre.Banco_Registros.B0_address[2:0]
+@22
+[color] 5
+testbench.modulo_padre.Banco_Registros.B0_bus[15:0]
+@28
+[color] 5
+testbench.modulo_padre.Banco_Registros.RW
+[color] 5
+testbench.modulo_padre.Banco_Registros.D_address[2:0]
+@22
+[color] 5
+testbench.modulo_padre.Banco_Registros.D_bus[15:0]
+[color] 5
+testbench.modulo_padre.Banco_Registros.R3[15:0]
+[color] 5
+testbench.modulo_padre.Banco_Registros.R2[15:0]
+[color] 5
+testbench.modulo_padre.Banco_Registros.R1[15:0]
+[color] 5
+testbench.modulo_padre.Banco_Registros.R0[15:0]
+[color] 2
+testbench.modulo_padre.Unidad_Funciones.FS[3:0]
+[color] 2
+testbench.modulo_padre.Unidad_Funciones.A_bus[15:0]
+[color] 2
+testbench.modulo_padre.Unidad_Funciones.B_bus[15:0]
+[color] 2
+testbench.modulo_padre.Unidad_Funciones.UF_out[15:0]
+@28
+[color] 2
+testbench.modulo_padre.Unidad_Funciones.N
+[color] 2
+testbench.modulo_padre.Unidad_Funciones.Z
+@22
+[color] 1
+testbench.modulo_padre.Mux_B.X_bus[15:0]
+[color] 1
+testbench.modulo_padre.Mux_B.Y_bus[15:0]
+[color] 1
+testbench.modulo_padre.Mux_B.Z_bus[15:0]
+@28
+[color] 1
+testbench.modulo_padre.Mux_B.select
+@22
+[color] 3
+testbench.modulo_padre.Mux_D.X_bus[15:0]
+[color] 3
+testbench.modulo_padre.Mux_D.Y_bus[15:0]
+[color] 3
+testbench.modulo_padre.Mux_D.Z_bus[15:0]
+@28
+[color] 3
+testbench.modulo_padre.Mux_D.select
+@22
+[color] 7
+testbench.modulo_padre.Mem_Datos.Address[15:0]
+@28
+[color] 7
+testbench.modulo_padre.Mem_Datos.MW
+@22
+[color] 7
+testbench.modulo_padre.Mem_Datos.In[15:0]
+[color] 7
+testbench.modulo_padre.Mem_Datos.Out[15:0]
+[pattern_trace] 1
+[pattern_trace] 0
